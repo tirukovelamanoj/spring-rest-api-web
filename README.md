@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/ManojCSE17/spring-rest-api/workflows/CICD%20pipeline/badge.svg?branch=master&event=push" alt="CI" /></p>
+<p align="center"><img src="https://github.com/ManojCSE17/spring-rest-api-web/workflows/CICD%20pipeline/badge.svg?branch=master&event=push" alt="CI" /></p>
 
 # Simple springboot CRUD Restful API
 
