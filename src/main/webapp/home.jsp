@@ -9,8 +9,8 @@
 	<body onload="jsonify()">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="/web">REST API MandS LEAP POC</a>
-				<button class="btn btn-outline-danger d-flex" type="submit" onclick="location.href='/web/logout'">Logout</button>
+				<a class="navbar-brand" href="/">REST API MandS LEAP POC</a>
+				<button class="btn btn-outline-danger d-flex" type="submit" onclick="location.href='/logout'">Logout</button>
 			</div>
 		</nav>
 	
@@ -66,22 +66,22 @@
 		<script>
 			function getDetails() {
 				var z = document.getElementById("getOrdelete");
-				z.action = "/web/view";
+				z.action = "/view";
 				z.submit();
 			}
 			function deleteHotel() {
 				var z = document.getElementById("getOrdelete");
-				z.action = "/web/delete";
+				z.action = "/delete";
 				z.submit();
 			}
 			function addHotel() {
 				var z = document.getElementById("addOrupdate");
-				z.action = "/web/add";
+				z.action = "/add";
 				z.submit();
 			}
 			function updateHotel() {
 				var z = document.getElementById("addOrupdate");
-				z.action = "/web/update";
+				z.action = "/update";
 				z.submit();
 			}
 			function jsonify(){

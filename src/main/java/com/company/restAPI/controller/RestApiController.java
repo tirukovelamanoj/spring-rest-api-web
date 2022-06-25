@@ -22,7 +22,7 @@ import com.google.gson.Gson;
 
 @SpringBootApplication
 @RestController
-@RequestMapping("/api/hotels")
+@RequestMapping("/api")
 public class RestApiController {
 
 	@Autowired

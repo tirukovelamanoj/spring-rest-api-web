@@ -17,21 +17,21 @@ import com.company.restAPI.hotel.HotelService;
 import com.google.gson.Gson;
 
 @SpringBootApplication
-@RequestMapping("/web")
+@RequestMapping("/")
 @Controller
 public class RestApiMainController {
 
 	@Autowired
 	private HotelService hotelService;
 
-	@RequestMapping
+	@RequestMapping("/*")
 	public String home() {
 		return "home.jsp";
 	}
 
-	@GetMapping(value = "/view*", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "view*", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ModelAndView returnHotel(@RequestParam("hotelIdToSearch") String s) {
-		ModelAndView mv = new ModelAndView("/web");
+		ModelAndView mv = new ModelAndView("/");
 		if(s.isEmpty()) {
 			mv.addObject("message", "FAILURE");
 			return mv;
@@ -53,7 +53,7 @@ public class RestApiMainController {
 		return mv;
 	}
 
-	@PostMapping("/add")
+	@PostMapping("add")
 	public ModelAndView addHotelDetails(@RequestParam("hotelName") String hotelName, @RequestParam("hotelAddress") String hotelAddress, @RequestParam("hotelPinCode") String hotelPinCode, @RequestParam("hotelRating") String hotelRating) {
 		ModelAndView mv = new ModelAndView("/web");
 		if(hotelRating.isEmpty() || hotelPinCode.isEmpty()) {
@@ -71,7 +71,7 @@ public class RestApiMainController {
 		return mv;
 	}
 
-	@PostMapping("/update")
+	@PostMapping("update")
 	public ModelAndView updateHotelDetails(@RequestParam("hotelId") String hotelId, @RequestParam("hotelName") String hotelName, @RequestParam("hotelAddress") String hotelAddress, @RequestParam("hotelPinCode") String hotelPinCode, @RequestParam("hotelRating") String hotelRating) {
 		ModelAndView mv = new ModelAndView("/web");
 		if(hotelId.isEmpty()) {
@@ -88,7 +88,7 @@ public class RestApiMainController {
 		return mv;
 	}
 
-	@GetMapping("/delete*")
+	@GetMapping("delete*")
 	public ModelAndView deleteHotelDetails(@RequestParam("hotelIdToSearch") String s) {
 		ModelAndView mv = new ModelAndView("/web");
 		if(s.isEmpty()) {
