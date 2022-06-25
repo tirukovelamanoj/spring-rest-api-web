@@ -32,11 +32,11 @@ jobs:
         if: success() && github.event_name == 'push' && github.ref_name == 'master'
         run: mvn clean package
 
-      - name: Upload JAR file as artifact
+      - name: Upload WAR file as artifact
         if: success() && github.event_name == 'push' && github.ref_name == 'master'
         uses: actions/upload-artifact@v2
         with:
-          name: JAR file
+          name: WAR file
           path: target/restapiweb.war
 
       - name: Create Github issue on failure
