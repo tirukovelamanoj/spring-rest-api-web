@@ -5,7 +5,10 @@
 ## Languages
 <b>
 Java,<br>
-JSP
+JSP,<br>
+Bootstrap,<br>
+HTML,<br>
+JavaScript
 </b>
 
 <br>
