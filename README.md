@@ -39,7 +39,7 @@ mvn package
 <br>
 
 ## Packaging
-<b>JAR</b>
+<b>WAR</b>
 
 <br>
 
