@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: JAR file
-          path: target/restapiweb.jar
+          path: target/restapiweb.war
 
       - name: Create Github issue on failure
         if: failure()
