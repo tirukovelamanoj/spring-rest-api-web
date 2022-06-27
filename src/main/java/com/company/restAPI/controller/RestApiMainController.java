@@ -29,6 +29,11 @@ public class RestApiMainController {
 	public String home() {
 		return "home.jsp";
 	}
+	
+	@PostMapping("/")
+	public String home() {
+		return "home.jsp";
+	}
 
 	@GetMapping(value = "view*", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ModelAndView returnHotel(@RequestParam("hotelIdToSearch") String s) {
