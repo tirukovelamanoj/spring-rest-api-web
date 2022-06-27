@@ -30,7 +30,7 @@ public class RestApiMainController {
 		return "home.jsp";
 	}
 	
-	@PostMapping("/")
+	@PostMapping("/*")
 	public String postHome() {
 		return "home.jsp";
 	}
