@@ -29,9 +29,8 @@ public class HotelService {
 			hotel = repo.findById(id).get();
 		} catch (NoSuchElementException e) {
 			logger.error(e.getMessage());
-		} finally {
-			return hotel;
 		}
+		return hotel;
 	}
 
 	public void addHotel(Hotel hotel) {
