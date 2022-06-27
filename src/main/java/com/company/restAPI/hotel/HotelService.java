@@ -2,10 +2,9 @@ package com.company.restAPI.hotel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +13,9 @@ public class HotelService {
 
 	@Autowired
 	private HotelRepository repo;
-
-	private Logger logger = LoggerFactory.getLogger(HotelService.class);
+	
+	@Autowired
+	private ModelMapper modelMapper;
 
 	public List<Hotel> getAllHotels() {
 		List<Hotel> hotelList = new ArrayList<Hotel>();
@@ -25,32 +25,32 @@ public class HotelService {
 
 	public Hotel getHotel(int id) {
 		Hotel hotel = null;
-		try {
-			hotel = repo.findById(id).get();
-		} catch (NoSuchElementException e) {
-			logger.error(e.getMessage());
+		Optional<Hotel> h = repo.findById(id);
+		if (h.isPresent()) {
+			hotel = h.get();
 		}
 		return hotel;
 	}
 
-	public void addHotel(Hotel hotel) {
+	public void addHotel(HotelDTO hotelDTO) {
+		Hotel hotel = modelMapper.map(hotelDTO, Hotel.class);
 		repo.save(hotel);
 	}
 
-	public boolean updateHotel(Hotel hotel) {
-		Hotel existingHotel = getHotel(hotel.getHotelId());
+	public boolean updateHotel(HotelDTO hotelDTO) {
+		Hotel existingHotel = getHotel(hotelDTO.getHotelId());
 		if (existingHotel != null) {
-			if (hotel.getHotelAddress() != null) {
-				existingHotel.setHotelAddress(hotel.getHotelAddress());
+			if (hotelDTO.getHotelAddress() != null) {
+				existingHotel.setHotelAddress(hotelDTO.getHotelAddress());
 			}
-			if (hotel.getHotelPinCode() > 0) {
-				existingHotel.setHotelPinCode(hotel.getHotelPinCode());
+			if (hotelDTO.getHotelPinCode() > 0) {
+				existingHotel.setHotelPinCode(hotelDTO.getHotelPinCode());
 			}
-			if (hotel.getHotelRating() > 0) {
-				existingHotel.setHotelRating(hotel.getHotelRating());
+			if (hotelDTO.getHotelRating() > 0) {
+				existingHotel.setHotelRating(hotelDTO.getHotelRating());
 			}
-			if (hotel.getHotelName() != null) {
-				existingHotel.setHotelName(hotel.getHotelName());
+			if (hotelDTO.getHotelName() != null) {
+				existingHotel.setHotelName(hotelDTO.getHotelName());
 			}
 			repo.save(existingHotel);
 			return true;
