@@ -55,7 +55,7 @@ mvn package
 <b>Get list of all hotels (GET)</b><br/>
 
 ```
-http://restapijava-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api/hotels
+http://http://springrestapiweb-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api
 
 Auth:
 username: {{username}}
@@ -65,7 +65,7 @@ password: {{password}}
 <b>Get hotel with id (GET)</b><br/>
 
 ```
-http://restapijava-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api/hotel/{id}
+http://http://springrestapiweb-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api/{id}
 
 Auth:
 username: {{username}}
@@ -75,7 +75,7 @@ password: {{password}}
 <b>Add hotel details (POST)</b><br/>
 
 ```
-http://restapijava-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api/hotels
+http://http://springrestapiweb-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api
 
 Auth:
 username: {{username}}
@@ -96,7 +96,7 @@ Body (JSON):
 <b>Update hotel details (PUT)</b><br/>
 
 ```
-http://restapijava-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api/hotels
+http://http://springrestapiweb-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api
 
 Auth:
 username: {{username}}
@@ -115,7 +115,7 @@ Body (JSON):
 <b>Delete hotel details (DEL)</b><br/>
 
 ```
-http://restapijava-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api/hotels/{id}
+http://http://springrestapiweb-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api/{id}
 
 Auth:
 username: {{username}}
