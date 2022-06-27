@@ -25,7 +25,7 @@ public class RestApiMainController {
 	@Autowired
 	private HotelService hotelService;
 
-	@RequestMapping("/*")
+	@GetMapping("/*")
 	public String home() {
 		return "home.jsp";
 	}
