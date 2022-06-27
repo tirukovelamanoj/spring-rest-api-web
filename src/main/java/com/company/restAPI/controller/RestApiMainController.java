@@ -26,12 +26,12 @@ public class RestApiMainController {
 	private HotelService hotelService;
 
 	@GetMapping("/*")
-	public String home() {
+	public String getHome() {
 		return "home.jsp";
 	}
 	
 	@PostMapping("/")
-	public String home() {
+	public String postHome() {
 		return "home.jsp";
 	}
 
