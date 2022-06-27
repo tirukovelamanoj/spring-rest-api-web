@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.company.restAPI.hotel.Hotel;
+import com.company.restAPI.hotel.HotelDTO;
 import com.company.restAPI.hotel.HotelService;
 import com.google.gson.Gson;
 
@@ -60,7 +61,7 @@ public class RestApiMainController {
 			mv.addObject("message", "FAILURE");
 			return mv;
 		}
-		Hotel hotel = new Hotel(hotelName, Float.parseFloat(hotelRating), hotelAddress, Integer.parseInt(hotelPinCode));
+		HotelDTO hotel = new HotelDTO(hotelName, Float.parseFloat(hotelRating), hotelAddress, Integer.parseInt(hotelPinCode));
 		if (hotel != null && hotel.getHotelAddress() != null && hotel.getHotelName() != null
 				&& hotel.getHotelPinCode() > 0 && hotel.getHotelRating() > 0) {
 			hotelService.addHotel(hotel);
