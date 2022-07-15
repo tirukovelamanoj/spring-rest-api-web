@@ -1,0 +1,33 @@
+type Query {
+	returnHotels: [Hotel]
+	returnHotel(hotelId: ID!): Hotel
+	deleteHotelDetails(hotelId: ID!): String!
+}
+
+type Mutation {
+	addHotelDetails(hotelDTO: addHotelInput): String!
+	updateHotelDetails(hotelDTO: updateHotelInput): String!
+}
+
+input addHotelInput{
+	hotelName: String!
+	hotelRating: Float!
+	hotelAddress: String!
+	hotelPinCode: Int!
+}
+
+input updateHotelInput{
+	hotelId: ID!
+	hotelName: String
+	hotelRating: Float
+	hotelAddress: String
+	hotelPinCode: Int
+}
+
+type Hotel {
+	hotelId: ID!
+	hotelName: String!
+	hotelRating: Float!
+	hotelAddress: String!
+	hotelPinCode: Int!
+}
