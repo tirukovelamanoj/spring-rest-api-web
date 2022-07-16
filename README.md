@@ -52,30 +52,69 @@ mvn package
 
 ## Rest API URLs 
 
-<b>Get list of all hotels (GET)</b><br/>
+<b>Get list of all hotels (GET) - to retrieve XSRF-TOKEN</b><br/>
 
 ```
-http://http://springrestapiweb-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api
+http://springrestapiweb-env.eba-ixp9jwys.ap-southeast-1.elasticbeanstalk.com/hotels
 
 Auth:
 username: {{username}}
 password: {{password}}
+
+Tests:
+pm.environment.set('csrf-token', pm.cookies.get('XSRF-TOKEN'))
 ```
 
-<b>Get hotel with id (GET)</b><br/>
+<b>Get list of all hotels (POST)</b><br/>
 
 ```
-http://http://springrestapiweb-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api/{id}
+http://springrestapiweb-env.eba-ixp9jwys.ap-southeast-1.elasticbeanstalk.com/api
+
+Headers:
+X-XSRF-TOKEN: {{csrf-token}}
 
 Auth:
 username: {{username}}
 password: {{password}}
+
+Body:
+query {
+    returnHotels {
+        hotelId
+        hotelName
+        hotelRating
+    }
+}
+```
+
+<b>Get hotel with id (POST)</b><br/>
+
+```
+http://springrestapiweb-env.eba-ixp9jwys.ap-southeast-1.elasticbeanstalk.com/api
+
+Headers:
+X-XSRF-TOKEN: {{csrf-token}}
+
+Auth:
+username: {{username}}
+password: {{password}}
+
+Body:
+query {
+    returnHotel(hotelId: 7) {
+        hotelName
+        hotelRating
+    }
+}
 ```
 
 <b>Add hotel details (POST)</b><br/>
 
 ```
-http://http://springrestapiweb-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api
+http://springrestapiweb-env.eba-ixp9jwys.ap-southeast-1.elasticbeanstalk.com/api
+
+Headers:
+X-XSRF-TOKEN: {{csrf-token}}
 
 Auth:
 username: {{username}}
@@ -84,19 +123,24 @@ password: {{password}}
 Header:
 X-XSRF-TOKEN: {{CSRF-TOKEN}}
 
-Body (JSON):
-{
-        "hotelName": "ITC Kohenur",
-        "hotelRating": 4.8,
-        "hotelAddress": "Hyderabad",
-        "hotelPinCode": 500044
+Body:
+mutation {
+    addHotelDetails(hotelDTO: {
+        hotelName: "Taj Banjara"
+        hotelRating: 4.6
+        hotelPinCode: 500044
+        hotelAddress: "Hyderabad"
+    })
 }
 ```
 
-<b>Update hotel details (PUT)</b><br/>
+<b>Update hotel details (POST)</b><br/>
 
 ```
-http://http://springrestapiweb-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api
+http://springrestapiweb-env.eba-ixp9jwys.ap-southeast-1.elasticbeanstalk.com/api
+
+Headers:
+X-XSRF-TOKEN: {{csrf-token}}
 
 Auth:
 username: {{username}}
@@ -105,19 +149,30 @@ password: {{password}}
 Header:
 X-XSRF-TOKEN: {{CSRF-TOKEN}}
 
-Body (JSON):
-{
-        "hotelId": 2,
-        "hotelRating": 4.9,
+Body:
+mutation {
+    updateHotelDetails(hotelDTO: {
+        hotelId: 7
+        hotelPinCode: 500062
+        hotelRating: 3.9
+    })
 }
 ```
 
-<b>Delete hotel details (DEL)</b><br/>
+<b>Delete hotel details (POST)</b><br/>
 
 ```
-http://http://springrestapiweb-env.subject-to-change.ap-southeast-1.elasticbeanstalk.com/api/{id}
+http://springrestapiweb-env.eba-ixp9jwys.ap-southeast-1.elasticbeanstalk.com/api
+
+Headers:
+X-XSRF-TOKEN: {{csrf-token}}
 
 Auth:
 username: {{username}}
 password: {{password}}
+
+Body:
+query {
+    deleteHotelDetails(hotelId: 1002)
+}
 ```
