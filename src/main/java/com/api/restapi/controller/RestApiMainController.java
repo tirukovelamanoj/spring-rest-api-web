@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,31 +27,40 @@ public class RestApiMainController {
 	@Autowired
 	private HotelService hotelService;
 
-	@GetMapping("/*")
+	@GetMapping
 	public String getHome() {
 		return "home.jsp";
 	}
-	
-	@PostMapping("/*")
+
+	@PostMapping
 	public String postHome() {
 		return "home.jsp";
+	}
+
+	@GetMapping(value = "hotels")
+	public ResponseEntity<List<Hotel>> getHotels() {
+		List<Hotel> hotelList = hotelService.getAllHotels();
+		if (hotelList.isEmpty()) {
+			return new ResponseEntity<List<Hotel>>(hotelList, HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Hotel>>(hotelList, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "view*", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ModelAndView returnHotel(@RequestParam("hotelIdToSearch") String s) {
 		ModelAndView mv = new ModelAndView("/");
-		if(s.isEmpty()) {
+		if (s.isEmpty()) {
 			mv.addObject("message", "FAILURE");
 			return mv;
 		}
 		int id = Integer.parseInt(s);
 		Hotel hotel = null;
 		List<Hotel> hotelList = null;
-		if(id > 0) {
+		if (id > 0) {
 			hotel = hotelService.getHotel(id);
 			if (hotel == null) {
 				mv.addObject("message", null);
-			}else {
+			} else {
 				mv.addObject("message", new Gson().toJson(hotel));
 			}
 		} else {
@@ -60,13 +71,16 @@ public class RestApiMainController {
 	}
 
 	@PostMapping("add")
-	public ModelAndView addHotelDetails(@RequestParam("hotelName") String hotelName, @RequestParam("hotelAddress") String hotelAddress, @RequestParam("hotelPinCode") String hotelPinCode, @RequestParam("hotelRating") String hotelRating) {
-		ModelAndView mv = new ModelAndView("/web");
-		if(hotelRating.isEmpty() || hotelPinCode.isEmpty()) {
+	public ModelAndView addHotelDetails(@RequestParam("hotelName") String hotelName,
+			@RequestParam("hotelAddress") String hotelAddress, @RequestParam("hotelPinCode") String hotelPinCode,
+			@RequestParam("hotelRating") String hotelRating) {
+		ModelAndView mv = new ModelAndView("/");
+		if (hotelRating.isEmpty() || hotelPinCode.isEmpty()) {
 			mv.addObject("message", "FAILURE");
 			return mv;
 		}
-		HotelDTO hotel = new HotelDTO(hotelName, Float.parseFloat(hotelRating), hotelAddress, Integer.parseInt(hotelPinCode));
+		HotelDTO hotel = new HotelDTO(hotelName, Float.parseFloat(hotelRating), hotelAddress,
+				Integer.parseInt(hotelPinCode));
 		if (hotel != null && hotel.getHotelAddress() != null && hotel.getHotelName() != null
 				&& hotel.getHotelPinCode() > 0 && hotel.getHotelRating() > 0) {
 			hotelService.addHotel(hotel);
@@ -78,14 +92,17 @@ public class RestApiMainController {
 	}
 
 	@PostMapping("update")
-	public ModelAndView updateHotelDetails(@RequestParam("hotelId") String hotelId, @RequestParam("hotelName") String hotelName, @RequestParam("hotelAddress") String hotelAddress, @RequestParam("hotelPinCode") String hotelPinCode, @RequestParam("hotelRating") String hotelRating) {
-		ModelAndView mv = new ModelAndView("/web");
-		if(hotelId.isEmpty()) {
+	public ModelAndView updateHotelDetails(@RequestParam("hotelId") String hotelId,
+			@RequestParam("hotelName") String hotelName, @RequestParam("hotelAddress") String hotelAddress,
+			@RequestParam("hotelPinCode") String hotelPinCode, @RequestParam("hotelRating") String hotelRating) {
+		ModelAndView mv = new ModelAndView("/");
+		if (hotelId.isEmpty()) {
 			mv.addObject("message", "FAILURE");
 			return mv;
 		}
 		int id = Integer.parseInt(hotelId);
-		boolean updatedHotelDetails = hotelService.updateHotelUsingForm(id, hotelName, hotelRating, hotelAddress, hotelPinCode);
+		boolean updatedHotelDetails = hotelService.updateHotelUsingForm(id, hotelName, hotelRating, hotelAddress,
+				hotelPinCode);
 		if (updatedHotelDetails) {
 			mv.addObject("message", "SUCCESS");
 		} else {
@@ -96,8 +113,8 @@ public class RestApiMainController {
 
 	@GetMapping("delete*")
 	public ModelAndView deleteHotelDetails(@RequestParam("hotelIdToSearch") String s) {
-		ModelAndView mv = new ModelAndView("/web");
-		if(s.isEmpty()) {
+		ModelAndView mv = new ModelAndView("/");
+		if (s.isEmpty()) {
 			mv.addObject("message", "FAILURE");
 			return mv;
 		}
