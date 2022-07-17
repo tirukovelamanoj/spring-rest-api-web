@@ -77,7 +77,7 @@ Auth:
 username: {{username}}
 password: {{password}}
 
-Body:
+Body (GraphQL):
 query {
     returnHotels {
         hotelId
@@ -99,7 +99,7 @@ Auth:
 username: {{username}}
 password: {{password}}
 
-Body:
+Body (GraphQL):
 query {
     returnHotel(hotelId: 7) {
         hotelName
@@ -120,10 +120,7 @@ Auth:
 username: {{username}}
 password: {{password}}
 
-Header:
-X-XSRF-TOKEN: {{CSRF-TOKEN}}
-
-Body:
+Body (GraphQL):
 mutation {
     addHotelDetails(hotelDTO: {
         hotelName: "Taj Banjara"
@@ -146,10 +143,7 @@ Auth:
 username: {{username}}
 password: {{password}}
 
-Header:
-X-XSRF-TOKEN: {{CSRF-TOKEN}}
-
-Body:
+Body (GraphQL):
 mutation {
     updateHotelDetails(hotelDTO: {
         hotelId: 7
@@ -171,7 +165,7 @@ Auth:
 username: {{username}}
 password: {{password}}
 
-Body:
+Body (GraphQL):
 query {
     deleteHotelDetails(hotelId: 1002)
 }
