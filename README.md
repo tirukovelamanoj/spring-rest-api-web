@@ -188,7 +188,7 @@ password: {{password}}
 
 Body (GraphQL):
 ```
-query {
+mutation {
     deleteHotelDetails(hotelId: 1002)
 }
 ```
