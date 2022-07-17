@@ -52,32 +52,38 @@ mvn package
 
 ## Rest API URLs 
 
-<b>Get list of all hotels (GET) - to retrieve XSRF-TOKEN</b><br/>
+<b>1) Get list of all hotels (GET) - to retrieve XSRF-TOKEN</b><br/>
 
 ```
 http://springrestapiweb-env.eba-ixp9jwys.ap-southeast-1.elasticbeanstalk.com/hotels
+```
 
-Auth:
-username: {{username}}
+Auth:<br/>
+username: {{username}}<br/>
 password: {{password}}
 
 Tests:
+```
 pm.environment.set('csrf-token', pm.cookies.get('XSRF-TOKEN'))
 ```
 
-<b>Get list of all hotels (POST)</b><br/>
+<br/>
+
+<b>2) Get list of all hotels (POST)</b><br/>
 
 ```
 http://springrestapiweb-env.eba-ixp9jwys.ap-southeast-1.elasticbeanstalk.com/api
+```
 
-Headers:
+Headers:<br/>
 X-XSRF-TOKEN: {{csrf-token}}
 
-Auth:
-username: {{username}}
+Auth:<br/>
+username: {{username}}<br/>
 password: {{password}}
 
 Body (GraphQL):
+```
 query {
     returnHotels {
         hotelId
@@ -87,19 +93,23 @@ query {
 }
 ```
 
-<b>Get hotel with id (POST)</b><br/>
+<br/>
+
+<b>3) Get hotel with id (POST)</b><br/>
 
 ```
 http://springrestapiweb-env.eba-ixp9jwys.ap-southeast-1.elasticbeanstalk.com/api
+```
 
-Headers:
+Headers:<br/>
 X-XSRF-TOKEN: {{csrf-token}}
 
-Auth:
-username: {{username}}
+Auth:<br/>
+username: {{username}}<br/>
 password: {{password}}
 
 Body (GraphQL):
+```
 query {
     returnHotel(hotelId: 7) {
         hotelName
@@ -108,19 +118,23 @@ query {
 }
 ```
 
-<b>Add hotel details (POST)</b><br/>
+<br/>
+
+<b>4) Add hotel details (POST)</b><br/>
 
 ```
 http://springrestapiweb-env.eba-ixp9jwys.ap-southeast-1.elasticbeanstalk.com/api
+```
 
-Headers:
+Headers:<br/>
 X-XSRF-TOKEN: {{csrf-token}}
 
-Auth:
-username: {{username}}
+Auth:<br/>
+username: {{username}}<br/>
 password: {{password}}
 
 Body (GraphQL):
+```
 mutation {
     addHotelDetails(hotelDTO: {
         hotelName: "Taj Banjara"
@@ -131,19 +145,23 @@ mutation {
 }
 ```
 
-<b>Update hotel details (POST)</b><br/>
+<br/>
+
+<b>5) Update hotel details (POST)</b><br/>
 
 ```
 http://springrestapiweb-env.eba-ixp9jwys.ap-southeast-1.elasticbeanstalk.com/api
+```
 
-Headers:
+Headers:<br/>
 X-XSRF-TOKEN: {{csrf-token}}
 
-Auth:
-username: {{username}}
+Auth:<br/>
+username: {{username}}<br/>
 password: {{password}}
 
 Body (GraphQL):
+```
 mutation {
     updateHotelDetails(hotelDTO: {
         hotelId: 7
@@ -153,19 +171,23 @@ mutation {
 }
 ```
 
-<b>Delete hotel details (POST)</b><br/>
+<br/>
+
+<b>6) Delete hotel details (POST)</b><br/>
 
 ```
 http://springrestapiweb-env.eba-ixp9jwys.ap-southeast-1.elasticbeanstalk.com/api
+```
 
-Headers:
+Headers:<br/>
 X-XSRF-TOKEN: {{csrf-token}}
 
-Auth:
-username: {{username}}
+Auth:<br/>
+username: {{username}}<br/>
 password: {{password}}
 
 Body (GraphQL):
+```
 query {
     deleteHotelDetails(hotelId: 1002)
 }
