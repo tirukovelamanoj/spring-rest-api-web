@@ -51,12 +51,9 @@ public class RestApiController {
 		return "FAILURE";
 	}
 
-	@QueryMapping
-	public String deleteHotelDetails(@Argument int hotelId) {
-		boolean deletedHotelDetails = hotelService.deleteHotel(hotelId);
-		if (deletedHotelDetails) {
-			return "SUCCESS";
-		}
-		return "FAILURE";
+	@MutationMapping
+	public Hotel deleteHotelDetails(@Argument int hotelId) {
+		Hotel deletedHotelDetails = hotelService.deleteHotel(hotelId);
+		return deletedHotelDetails;
 	}
 }

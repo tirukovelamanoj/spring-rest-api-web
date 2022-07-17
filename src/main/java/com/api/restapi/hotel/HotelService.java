@@ -2,6 +2,7 @@ package com.api.restapi.hotel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
@@ -13,7 +14,7 @@ public class HotelService {
 
 	@Autowired
 	private HotelRepository repo;
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -57,8 +58,9 @@ public class HotelService {
 		}
 		return false;
 	}
-	
-	public boolean updateHotelUsingForm(int id, String hotelName, String hotelRating, String hotelAddress, String hotelPinCode) {
+
+	public boolean updateHotelUsingForm(int id, String hotelName, String hotelRating, String hotelAddress,
+			String hotelPinCode) {
 		Hotel existingHotel = getHotel(id);
 		if (existingHotel != null) {
 			if (!hotelAddress.isBlank()) {
@@ -79,12 +81,11 @@ public class HotelService {
 		return false;
 	}
 
-	public boolean deleteHotel(int id) {
+	public Hotel deleteHotel(int id) {
 		Hotel existingHotel = getHotel(id);
-		if (existingHotel != null) {
+		if (!Objects.isNull(existingHotel)) {
 			repo.delete(existingHotel);
-			return true;
 		}
-		return false;
+		return existingHotel;
 	}
 }

@@ -1,6 +1,7 @@
 package com.api.restapi.controller;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -119,11 +120,11 @@ public class RestApiMainController {
 			return mv;
 		}
 		int id = Integer.parseInt(s);
-		boolean deletedHotelDetails = hotelService.deleteHotel(id);
-		if (deletedHotelDetails) {
-			mv.addObject("message", "SUCCESS");
-		} else {
+		Hotel deletedHotelDetails = hotelService.deleteHotel(id);
+		if (Objects.isNull(deletedHotelDetails)) {
 			mv.addObject("message", "FAILURE");
+		} else {
+			mv.addObject("message", "SUCCESS");
 		}
 		return mv;
 	}
