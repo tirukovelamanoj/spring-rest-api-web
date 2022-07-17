@@ -189,6 +189,10 @@ password: {{password}}
 Body (GraphQL):
 ```
 mutation {
-    deleteHotelDetails(hotelId: 1002)
+    deleteHotelDetails(hotelId: 1002){
+        hotelId
+        hotelName
+        hotelRating
+    }
 }
 ```
