@@ -6,7 +6,7 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 		<title>REST API</title>
 	</head>
-	<body onload="jsonify()">
+	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="/">REST API MandS LEAP POC</a>
@@ -59,7 +59,7 @@
 							<div><button type="button" class="btn btn-primary" onclick="deleteHotel()">Delete</button></div>
 						</div>
 					</form>
-					<div class="border border-3 rounded mb-3 w-100 p-3" id="hotelDetails"><pre><code id="json-container"><%= (String) request.getAttribute("message") %></code></pre></div>
+					<div class="border border-3 rounded mb-3 w-100 p-3" style="overflow: auto;height: 350px;" id="hotelDetails"><pre><code id="json-container"><%= (String) request.getAttribute("message") %></code></pre></div>
 				</div>
 			</div>	
 		</div>
@@ -83,10 +83,6 @@
 				var z = document.getElementById("addOrupdate");
 				z.action = "/update";
 				z.submit();
-			}
-			function jsonify(){
-				var z = document.getElementById('json-container').innerHTML;
-				document.getElementById('json-container').innerHTML = JSON.stringify(JSON.parse(z), null, 2);
 			}
 		</script>
 </body>

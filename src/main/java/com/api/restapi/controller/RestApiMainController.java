@@ -19,6 +19,7 @@ import com.api.restapi.hotel.Hotel;
 import com.api.restapi.hotel.HotelDTO;
 import com.api.restapi.hotel.HotelService;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @SpringBootApplication
 @RequestMapping("/")
@@ -54,6 +55,9 @@ public class RestApiMainController {
 			mv.addObject("message", "FAILURE");
 			return mv;
 		}
+		GsonBuilder builder = new GsonBuilder();
+		builder.setPrettyPrinting();
+		Gson gson = builder.create();
 		int id = Integer.parseInt(s);
 		Hotel hotel = null;
 		List<Hotel> hotelList = null;
@@ -62,11 +66,11 @@ public class RestApiMainController {
 			if (hotel == null) {
 				mv.addObject("message", null);
 			} else {
-				mv.addObject("message", new Gson().toJson(hotel));
+				mv.addObject("message", gson.toJson(hotel));
 			}
 		} else {
 			hotelList = hotelService.getAllHotels();
-			mv.addObject("message", new Gson().toJson(hotelList));
+			mv.addObject("message", gson.toJson(hotelList));
 		}
 		return mv;
 	}
